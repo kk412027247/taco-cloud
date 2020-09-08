@@ -1,6 +1,5 @@
 package tacos.web;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,6 @@ import tacos.data.TacoRepository;
 
 import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("order")
@@ -28,14 +26,14 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
-    private final TacoRepository designRepo;
+    private final TacoRepository tacoRepo;
 
     @Autowired
     public DesignTacoController(
             IngredientRepository ingredientRepo,
-            TacoRepository designRepo) {
+            TacoRepository tacoRepo) {
         this.ingredientRepo = ingredientRepo;
-        this.designRepo = designRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @ModelAttribute(name = "order")
@@ -43,14 +41,13 @@ public class DesignTacoController {
         return new Order();
     }
 
-    @ModelAttribute(name = "taco")
-    public Taco taco(){
+    @ModelAttribute(name = "design")
+    public Taco taco() {
         return new Taco();
     }
 
     @GetMapping
     public String showDesignForm(Model model) {
-
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepo.findAll().forEach(ingredients::add);
         Type[] types = Ingredient.Type.values();
@@ -71,7 +68,7 @@ public class DesignTacoController {
             return "design";
         }
 
-        Taco saved = designRepo.save(design);
+        Taco saved = tacoRepo.save(design);
         order.addDesign(saved);
         return "redirect:/orders/current";
     }
