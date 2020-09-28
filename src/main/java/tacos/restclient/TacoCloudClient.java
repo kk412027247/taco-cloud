@@ -18,12 +18,12 @@ public class TacoCloudClient {
 
 
     private RestTemplate rest;
-    private Traverson traverson;
+//    private Traverson traverson;
 
     @Autowired
-    public TacoCloudClient(RestTemplate rest, Traverson traverson) {
+    public TacoCloudClient(RestTemplate rest) {
         this.rest = rest;
-        this.traverson = traverson;
+//        this.traverson = traverson;
     }
 
 

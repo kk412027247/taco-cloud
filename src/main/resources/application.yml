@@ -1,3 +1,18 @@
 taco:
   orders:
     pageSize:10
+
+spring:
+  artemis:
+    host:artemis.tacocloud.com
+    port:61617
+    user:tacoweb
+    password:13tm31n
+  activemq:
+    broker-url:tcp://activemq.tacocloud.com
+    user:tacoweb
+    password:13tm31n
+    in-memory:false
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
